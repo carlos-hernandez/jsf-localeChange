@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<h:body>
-    <h1>JSF 2 Internationalization Example</h1>
+<f:view locale="#{languageBean.localeCode}">
+    <h:body>
+        <h1>JSF 2 Internationalization Example</h1>
 
-    <h:form>
-        <h3>
-            <h:outputText value="#{i18n['index.welcome']}"/>
-        </h3>
+        <h:form>
+            <h3>
+                <h:outputText value="#{i18n['index.welcome']}"/>
+            </h3>
 
-        <h:panelGrid columns="2">
-            Language :
-            <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
-                             valueChangeListener="#{language.countryLocaleCodeChanged}">
-                <f:selectItem itemLabel="Select a language" itemValue=""/>
-                <f:selectItems value="#{language.countriesInMap}"/>
-            </h:selectOneMenu>
-        </h:panelGrid>
-    </h:form>
-</h:body>
+            <h:panelGrid columns="2">
+                Language :
+                <h:selectOneMenu value="#{languageBean.localeCode}" onchange="submit()"
+                                 valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
+                    <f:selectItem itemLabel="Select a language" itemValue=""/>
+                    <f:selectItems value="#{languageBean.countriesInMap}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</f:view>
 </html>

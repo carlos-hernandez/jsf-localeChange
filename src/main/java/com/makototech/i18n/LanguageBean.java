@@ -9,13 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@ManagedBean(name = "language")
+@ManagedBean(name = "languageBean")
 @SessionScoped
 public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String localeCode;
+    private String localeCode = "en_US";
 
     private static Map<String, Locale> countries;
 
@@ -53,14 +53,17 @@ public class LanguageBean implements Serializable {
     }
 
     //value change event listener
-    public void countryLocaleCodeChanged(ValueChangeEvent e) {
+    public void countryLocaleCodeChanged(ValueChangeEvent event) {
+        Object newValue = event.getNewValue();
 
-        String newLocaleValue = e.getNewValue().toString();
+        if (newValue != null) {
+            String newLocaleValue = event.getNewValue().toString();
 
-        // Loop country map to compare the locale code
-        for (Map.Entry<String, Locale> entry : countries.entrySet()) {
-            if (entry.getValue().toString().equals(newLocaleValue)) {
-                FacesContext.getCurrentInstance().getViewRoot().setLocale(entry.getValue());
+            // Loop country map to compare the locale code
+            for (Map.Entry<String, Locale> entry : countries.entrySet()) {
+                if (entry.getValue().toString().equals(newLocaleValue)) {
+                    FacesContext.getCurrentInstance().getViewRoot().setLocale(entry.getValue());
+                }
             }
         }
     }
