@@ -9,13 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@ManagedBean(name = "language")
+@ManagedBean(name = "languageBean")
 @SessionScoped
 public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String localeCode;
+    private String localeCode = "en_US";
 
     private static Map<String, Locale> countries;
 
