@@ -17,7 +17,7 @@
 
         <h:form>
             <h3>
-                <p:outputLabel value="#{i18n['index.welcome']}"/>
+                <p:outputLabel value="#{i18n['default.welcome']}"/>
             </h3>
 
             <p:panelGrid>
@@ -30,13 +30,15 @@
 
                             <p:ajax event="valueChange" process="@this" update="@form"
                                     listener="#{languageBean.countryLocaleCodeChanged()}"/>
-
-                            <f:selectItem itemLabel="Select a language" itemValue=""/>
                             <f:selectItems value="#{languageBean.countriesInMap}"/>
                         </p:selectOneMenu>
                     </p:column>
                 </p:row>
             </p:panelGrid>
+
+            <p:separator/>
+
+            <h:link value="#{i18n['default.link']}" outcome="message"/>
         </h:form>
     </h:body>
 </f:view>
