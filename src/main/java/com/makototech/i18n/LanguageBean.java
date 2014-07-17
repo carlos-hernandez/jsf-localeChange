@@ -16,26 +16,18 @@ public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Map<String, Locale> countries;
+
     static {
         countries = new LinkedHashMap<String, Locale>(); //label, value
         countries.put("Arabic", new Locale("ar"));
-        countries.put("Czech (Czech Republic)", new Locale("cs", "CZ"));
         countries.put("German (Germany)", Locale.GERMANY);
-        countries.put("English (Australia)", new Locale("en", "AU"));
         countries.put("English (United Kingdom)", Locale.UK);
-        countries.put("English (Ireland)", new Locale("en", "IE"));
         countries.put("English (United States)", Locale.US);
-        countries.put("English (South Africa)", new Locale("en", "ZA"));
         countries.put("Spanish (Spain)", new Locale("es", "ES"));
-        countries.put("Spanish (United States)", new Locale("es", "US"));
         countries.put("French (France)", Locale.FRANCE);
-        countries.put("Italian (Italy)", Locale.ITALY);
-        countries.put("Polish (Poland)", new Locale("pl", "PL"));
-        countries.put("Portuguese (Brazil)", new Locale("pt", "BR"));
-        countries.put("Russian (Russia)", new Locale("ru", "RU"));
-        countries.put("Turkish (Turkey)", new Locale("tr", "TR"));
         countries.put("Chinese (China)", Locale.SIMPLIFIED_CHINESE);
     }
+
     private String localeCode = "en_US";
 
     public Map<String, Locale> getCountriesInMap() {
@@ -52,10 +44,7 @@ public class LanguageBean implements Serializable {
 
     //value change event listener
     public void countryLocaleCodeChanged() {
-        if (trimToNull(localeCode) == null) {
-            localeCode = "en_US";
-        }
-        else {
+        if (trimToNull(localeCode) != null) {
             // Loop country map to compare the locale code
             for (Map.Entry<String, Locale> entry : countries.entrySet()) {
                 if (entry.getValue().toString().equals(localeCode)) {

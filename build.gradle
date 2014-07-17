@@ -19,3 +19,7 @@ dependencies {
 
     compile 'org.apache.commons:commons-lang3:3.3.2'
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
