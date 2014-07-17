@@ -3,22 +3,19 @@ package com.makototech.i18n;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 @ManagedBean(name = "languageBean")
 @SessionScoped
 public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private String localeCode = "en_US";
-
     private static Map<String, Locale> countries;
-
     static {
         countries = new LinkedHashMap<String, Locale>(); //label, value
         countries.put("Arabic", new Locale("ar"));
@@ -39,6 +36,7 @@ public class LanguageBean implements Serializable {
         countries.put("Turkish (Turkey)", new Locale("tr", "TR"));
         countries.put("Chinese (China)", Locale.SIMPLIFIED_CHINESE);
     }
+    private String localeCode = "en_US";
 
     public Map<String, Locale> getCountriesInMap() {
         return countries;
@@ -53,15 +51,14 @@ public class LanguageBean implements Serializable {
     }
 
     //value change event listener
-    public void countryLocaleCodeChanged(ValueChangeEvent event) {
-        Object newValue = event.getNewValue();
-
-        if (newValue != null) {
-            String newLocaleValue = event.getNewValue().toString();
-
+    public void countryLocaleCodeChanged() {
+        if (trimToNull(localeCode) == null) {
+            localeCode = "en_US";
+        }
+        else {
             // Loop country map to compare the locale code
             for (Map.Entry<String, Locale> entry : countries.entrySet()) {
-                if (entry.getValue().toString().equals(newLocaleValue)) {
+                if (entry.getValue().toString().equals(localeCode)) {
                     FacesContext.getCurrentInstance().getViewRoot().setLocale(entry.getValue());
                 }
             }

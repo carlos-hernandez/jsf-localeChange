@@ -6,11 +6,16 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url = "http://repository.primefaces.org" }
 }
 
 dependencies {
     compile 'com.sun.faces:jsf-api:2.1.29'
     compile 'com.sun.faces:jsf-impl:2.1.29'
     providedCompile 'javax.servlet:servlet-api:2.5'
+
+    compile 'org.primefaces:primefaces:3.5'
+    compile 'org.primefaces.themes:bootstrap:1.0.10'
+
     compile 'org.apache.commons:commons-lang3:3.3.2'
 }

@@ -4,7 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="global.css"/>
+</h:head>
 
 <f:view locale="#{languageBean.localeCode}">
     <h:body>
@@ -12,17 +17,26 @@
 
         <h:form>
             <h3>
-                <h:outputText value="#{i18n['index.welcome']}"/>
+                <p:outputLabel value="#{i18n['index.welcome']}"/>
             </h3>
 
-            <h:panelGrid columns="2">
-                Language :
-                <h:selectOneMenu value="#{languageBean.localeCode}" onchange="submit()"
-                                 valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
-                    <f:selectItem itemLabel="Select a language" itemValue=""/>
-                    <f:selectItems value="#{languageBean.countriesInMap}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Language :"/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu value="#{languageBean.localeCode}">
+
+                            <p:ajax event="valueChange" process="@this" update="@form"
+                                    listener="#{languageBean.countryLocaleCodeChanged()}"/>
+
+                            <f:selectItem itemLabel="Select a language" itemValue=""/>
+                            <f:selectItems value="#{languageBean.countriesInMap}"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </h:form>
     </h:body>
 </f:view>
